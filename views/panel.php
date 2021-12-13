@@ -3,7 +3,7 @@
     session_start();
 
     if (!isset($_SESSION['nombre'])) {
-        require 'login.php';
+        header('location: panel/login');
     }
     
 
@@ -17,6 +17,6 @@
     <title>Panel de administración</title>
 </head>
 <body>
-    
+    <a href="controllers/cerrarSesion.php">Cerrar Sesión</a>
 </body>
 </html>

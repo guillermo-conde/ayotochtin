@@ -12,6 +12,15 @@
 
         $consulta = new Consultas();
         $acceso = $consulta->iniciarSesion($usuario, $password);
+
+        if ($acceso) {
+            session_start();
+            $_SESSION['nombre'] = $usuario;
+            header('location: ../panel');
+        } else {
+            header('location: ../panel');
+        }
+        
     } else {
         $acceso = false;
     }
