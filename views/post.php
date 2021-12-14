@@ -1,5 +1,5 @@
 <?php
-    require 'models/Consultas.php';
+    require 'models/MConsultas.php';
     $idPost = $seccion->extraerPost($_SERVER['REQUEST_URI']);
 
     $consulta = new Consultas();

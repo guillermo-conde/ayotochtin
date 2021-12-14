@@ -1,10 +1,9 @@
-<?php
-
-    require 'limpiarInputs.php';
-    require '../models/Consultas.php';
-    require '../config/config.php';
-
+<?php    
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        require 'limpiarInputs.php';
+        require '../models/MConsultas.php';
+        require '../config/config.php'; 
+
         $usuario = $_POST['usuario'];
         $password = $_POST['password'];
 
@@ -13,16 +12,20 @@
         $consulta = new Consultas();
         $acceso = $consulta->iniciarSesion($usuario, $password);
 
+
         if ($acceso) {
             session_start();
             $_SESSION['nombre'] = $usuario;
-            header('location: ../panel');
+            if (isset($_SESSION['error'])) {
+                unset($_SESSION['error']);
+            }
+            header ('location: ../panel');
         } else {
-            header('location: ../panel');
+            session_start();
+            $_SESSION['error'] = "<script>alert('Los datos no corresponden, intente nuevamente')</script>";
+            header ('location: ../panel');
         }
         
-    } else {
-        $acceso = false;
     }
     
     
